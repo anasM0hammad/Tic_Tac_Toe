@@ -1,6 +1,7 @@
 #include<iostream>
 #include<stdlib.h>
 
+
 using namespace std;
 
 char square[10] = {'o', '1', '2', '3', '4', '5', '6', '7', '8', '9'} ;
@@ -73,9 +74,17 @@ int check_win()
 
 int main()
 {
-	int choice , player=1, result=-1 ;               // -1 result means game is not complete initially
-	char mark ;                                      //tic tac toe mark for each player
+	int choice , player=1, result=-1, con ;               // -1 result means game is not complete initially
+	char mark ;                                        //tic tac toe mark for each player
+    bool game =true ;
 
+
+while(game)
+ {
+ 	for(int i=48 ; i<58; i++)                             // To initialise the board again for new game 
+ 		square[i]=i ;
+ 	
+ 
 	while(result==-1)
 	{
        system("cls");
@@ -122,16 +131,34 @@ int main()
   board();
 
   if(result == 0)
-  	cout<<"\tTIE\n" ;
+  	cout<<"\n\t   TIE\n" ;
 
   if(result== 1)
   {
   	if(mark == 'X')
-  		cout<<"\tPLAYER 2 WINS\n";
+  		cout<<"\n\t   PLAYER 2 WINS\n";
 
   	else
-  		cout<<"\tPLAYER 1 WINS\n" ;
-  }
+  		cout<<"\n\t   PLAYER 1 WINS\n" ;
 
+   }
+
+      cout<<"  \n\n" ;
+      cout<<"\t  Want to play another game \n" ;
+      cout<<"\t  Press 1 to continue\n" ;
+      cout<<"\t  press 0 to Quit : " ;
+      cin>>con ;
+
+      if(con==1)
+      	game=true ;
+
+      else if(con==0)
+      	game=false ;
+
+      else
+      	cout<<"wrong Choice" ;
+ }     
+
+   
 	return 0;
 }
