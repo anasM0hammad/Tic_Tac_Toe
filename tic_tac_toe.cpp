@@ -1,10 +1,12 @@
 #include<iostream>
 #include<stdlib.h>
+#include<ctime>
 
 
 using namespace std;
 
 char square[10] = {'o', '1', '2', '3', '4', '5', '6', '7', '8', '9'} ;
+
 
 
 // Function to print the Tic Tac Toe Board
@@ -74,15 +76,21 @@ int check_win()
 
 int main()
 {
-	int choice , player=1, result=-1, con ;               // -1 result means game is not complete initially
+	int choice , player=1, result=-1, game_type ;               // -1 result means game is not complete initially
 	char mark ;                                        //tic tac toe mark for each player
-    bool game =true ;
+  srand (time(NULL)) ;
 
+  cout<<"\n\n WELCOME TO TIC TAC TOE\n\n";
+  cout<<"1.Play with Computer\n";
+  cout<<"2.Play with Friend\n" ; 
+  cin>>game_type ;
 
-while(game)
- {
- 	for(int i=48 ; i<58; i++)                             // To initialise the board again for new game 
- 		square[i]=i ;
+  if(game_type!=1 && game_type!=2)
+  {
+    game_type=1 ;
+    cout<<"\nDefault game On.... Play with Computer\n" ;
+  }
+
  	
  
 	while(result==-1)
@@ -90,8 +98,26 @@ while(game)
        system("cls");
        board() ;
        cout<<"\n\n";
-       cout<<"\tplayer "<<player<<" Enter the Place number : ";
-       cin>>choice ;
+
+       if(game_type==2)
+       {
+         cout<<"\tplayer "<<player<<" Enter the Place number : ";
+         cin>>choice ;
+       } 
+
+       else{
+
+        if(player==1)
+         { 
+           cout<<"\tEnter the place number : " ;
+           cin>>choice;
+          }
+          
+          else
+          {
+            choice=(rand()%9 + 1) ;
+          } 
+       }
 
        if(player == 1)
        	mark = 'O' ;
@@ -135,29 +161,18 @@ while(game)
 
   if(result== 1)
   {
-  	if(mark == 'X')
+  	if(mark == 'X' && game_type==2)
   		cout<<"\n\t   PLAYER 2 WINS\n";
+
+    else if(mark =='X' && game_type == 1 )
+      cout<<"\n\t   Computer Wins\n" ;   
 
   	else
   		cout<<"\n\t   PLAYER 1 WINS\n" ;
 
    }
 
-      cout<<"  \n\n" ;
-      cout<<"\t  Want to play another game \n" ;
-      cout<<"\t  Press 1 to continue\n" ;
-      cout<<"\t  press 0 to Quit : " ;
-      cin>>con ;
-
-      if(con==1)
-      	game=true ;
-
-      else if(con==0)
-      	game=false ;
-
-      else
-      	cout<<"wrong Choice" ;
- }     
+    
 
    
 	return 0;
